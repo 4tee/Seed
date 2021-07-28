@@ -1,4 +1,4 @@
-package com.demo.seed
+package com.demo.seed.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -6,8 +6,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.demo.seed.R
 import com.demo.seed.databinding.ActivityDemoBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DemoActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
