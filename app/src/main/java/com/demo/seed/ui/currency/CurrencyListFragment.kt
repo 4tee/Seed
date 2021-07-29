@@ -1,4 +1,4 @@
-package com.demo.seed.ui
+package com.demo.seed.ui.currency
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.demo.seed.data.CurrencyInfoEntity
 import com.demo.seed.databinding.FragmentCurrencyListBinding
+import com.demo.seed.ui.DemoActivityViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CurrencyListFragment : Fragment() {
+class CurrencyListFragment : Fragment(), CurrencyListAdapter.OnItemClickListener {
 
-    private val viewModel: CurrencyListViewModel by viewModels()
+    private val activityViewModel: DemoActivityViewModel by viewModels({ requireActivity() })
 
     private var _binding: FragmentCurrencyListBinding? = null
 
@@ -31,7 +33,9 @@ class CurrencyListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val currencyListAdapter = CurrencyListAdapter()
+
+        val currencyListAdapter = CurrencyListAdapter(this)
+
         binding.apply {
             recyclerViewCurrencyList.apply {
                 adapter = currencyListAdapter
@@ -40,8 +44,12 @@ class CurrencyListFragment : Fragment() {
             }
         }
 
-        viewModel.currencyList.observe(viewLifecycleOwner) {
+        activityViewModel.currencyList.observe(viewLifecycleOwner) {
             currencyListAdapter.submitList(it)
         }
+    }
+
+    override fun onItemClicked(currencyInfo: CurrencyInfoEntity) {
+        activityViewModel.updateSelectedCurrencyInfo(currencyInfo)
     }
 }

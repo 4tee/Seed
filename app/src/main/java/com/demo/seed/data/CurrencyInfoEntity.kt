@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "currency_info_table")
 @Parcelize
-data class CurrencyInfo(
+data class CurrencyInfoEntity(
     @PrimaryKey val id: String,
     val name: String,
     val symbol: String

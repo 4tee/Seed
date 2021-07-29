@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import javax.inject.Provider
 
-@Database(entities = [CurrencyInfo::class], version = 1)
+@Database(entities = [CurrencyInfoEntity::class], version = 1)
 abstract class CurrencyDatabase : RoomDatabase() {
 
     abstract fun currencyDao(): CurrencyDao
@@ -23,20 +23,20 @@ abstract class CurrencyDatabase : RoomDatabase() {
             // operations during the creation
             val dao = database.get().currencyDao()
             applicationScope.launch {
-                dao.insert(CurrencyInfo("BTC", "Bitcoin", "BTC"))
-                dao.insert(CurrencyInfo("ETH", "Ethereum", "ETH"))
-                dao.insert(CurrencyInfo("XRP", "XRP", "XRP"))
-                dao.insert(CurrencyInfo("BCH", "Bitcoin Cash", "BCH"))
-                dao.insert(CurrencyInfo("LTC", "Litecoin", "LTC"))
-                dao.insert(CurrencyInfo("EOS", "EOS", "EOS"))
-                dao.insert(CurrencyInfo("BNB", "Binance Coin", "BNB"))
-                dao.insert(CurrencyInfo("LINK", "Chainlink", "LINK"))
-                dao.insert(CurrencyInfo("NEO", "NEO", "NEO"))
-                dao.insert(CurrencyInfo("ETC", "Ethereum Classic", "ETC"))
-                dao.insert(CurrencyInfo("ONT", "Ontology", "ONT"))
-                dao.insert(CurrencyInfo("CRO", "Crypto.com Chain", "CRO"))
-                dao.insert(CurrencyInfo("CUC", "Cucumber", "CUC"))
-                dao.insert(CurrencyInfo("USDC", "USD Coin", "USDC"))
+                dao.insert(CurrencyInfoEntity("BTC", "Bitcoin", "BTC"))
+                dao.insert(CurrencyInfoEntity("ETH", "Ethereum", "ETH"))
+                dao.insert(CurrencyInfoEntity("XRP", "XRP", "XRP"))
+                dao.insert(CurrencyInfoEntity("BCH", "Bitcoin Cash", "BCH"))
+                dao.insert(CurrencyInfoEntity("LTC", "Litecoin", "LTC"))
+                dao.insert(CurrencyInfoEntity("EOS", "EOS", "EOS"))
+                dao.insert(CurrencyInfoEntity("BNB", "Binance Coin", "BNB"))
+                dao.insert(CurrencyInfoEntity("LINK", "Chainlink", "LINK"))
+                dao.insert(CurrencyInfoEntity("NEO", "NEO", "NEO"))
+                dao.insert(CurrencyInfoEntity("ETC", "Ethereum Classic", "ETC"))
+                dao.insert(CurrencyInfoEntity("ONT", "Ontology", "ONT"))
+                dao.insert(CurrencyInfoEntity("CRO", "Crypto.com Chain", "CRO"))
+                dao.insert(CurrencyInfoEntity("CUC", "Cucumber", "CUC"))
+                dao.insert(CurrencyInfoEntity("USDC", "USD Coin", "USDC"))
             }
         }
     }
