@@ -2,7 +2,17 @@ package com.demo.seed.di
 
 import android.app.Application
 import androidx.room.Room
-import com.demo.seed.data.CurrencyDatabase
+import com.demo.seed.data.CurrencyRepository
+import com.demo.seed.data.cache.CacheDataSource
+import com.demo.seed.data.cache.CacheDataSourceImpl
+import com.demo.seed.data.cache.CurrencyListDaoService
+import com.demo.seed.data.cache.CurrencyListDaoServiceImpl
+import com.demo.seed.data.mapper.CurrencyMapper
+import com.demo.seed.data.model.CurrencyInfoEntity
+import com.demo.seed.data.room.CurrencyDao
+import com.demo.seed.data.room.CurrencyDatabase
+import com.demo.seed.ui.model.CurrencyInfo
+import com.demo.seed.util.EntityMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +25,35 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideCurrencyListDaoService(currencyDao: CurrencyDao): CurrencyListDaoService {
+        return CurrencyListDaoServiceImpl(currencyDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCacheDataSource(
+        currencyListDaoService: CurrencyListDaoService,
+        currencyMapper: CurrencyMapper
+    ): CacheDataSource {
+        return CacheDataSourceImpl(currencyListDaoService, currencyMapper)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCurrencyRepository(
+        cacheDataSource: CacheDataSource
+    ): CurrencyRepository {
+        return CurrencyRepository(cacheDataSource)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCacheMapper(): EntityMapper<CurrencyInfoEntity, CurrencyInfo> {
+        return CurrencyMapper()
+    }
 
     /* This will provide Room database */
     @Provides

@@ -1,4 +1,4 @@
-package com.demo.seed.data
+package com.demo.seed.data.model
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -11,4 +11,4 @@ data class CurrencyInfoEntity(
     @PrimaryKey val id: String,
     val name: String,
     val symbol: String
-): Parcelable
+) : Parcelable

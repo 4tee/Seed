@@ -1,8 +1,9 @@
-package com.demo.seed.data
+package com.demo.seed.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.demo.seed.data.model.CurrencyInfoEntity
 import com.demo.seed.di.ApplicationScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -17,7 +18,7 @@ abstract class CurrencyDatabase : RoomDatabase() {
     class Callback @Inject constructor(
         private val database: Provider<CurrencyDatabase>,
         @ApplicationScope private val applicationScope: CoroutineScope
-        ) : RoomDatabase.Callback() {
+    ) : RoomDatabase.Callback() {
         override fun onCreate(db: SupportSQLiteDatabase) {
             super.onCreate(db)
             // operations during the creation

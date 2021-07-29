@@ -5,15 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.demo.seed.data.CurrencyInfoEntity
 import com.demo.seed.databinding.ItemCurrencyBinding
+import com.demo.seed.ui.model.CurrencyInfo
 
-class CurrencyListAdapter(private val itemClickedListener: OnItemClickListener) : ListAdapter<CurrencyInfoEntity, CurrencyListAdapter.CurrencyViewHolder>(
-    DiffCallback()
-) {
+class CurrencyListAdapter(private val itemClickedListener: OnItemClickListener) :
+    ListAdapter<CurrencyInfo, CurrencyListAdapter.CurrencyViewHolder>(
+        DiffCallback()
+    ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder {
-        val binding = ItemCurrencyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemCurrencyBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CurrencyViewHolder(binding)
     }
 
@@ -22,7 +24,8 @@ class CurrencyListAdapter(private val itemClickedListener: OnItemClickListener) 
         holder.bind(item)
     }
 
-    inner class CurrencyViewHolder(private val binding: ItemCurrencyBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class CurrencyViewHolder(private val binding: ItemCurrencyBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.apply {
@@ -36,7 +39,7 @@ class CurrencyListAdapter(private val itemClickedListener: OnItemClickListener) 
             }
         }
 
-        fun bind(currencyInfo: CurrencyInfoEntity) {
+        fun bind(currencyInfo: CurrencyInfo) {
             binding.apply {
                 textCurrencyName.text = currencyInfo.name
                 textCurrencyCode.text = currencyInfo.symbol
@@ -45,16 +48,15 @@ class CurrencyListAdapter(private val itemClickedListener: OnItemClickListener) 
     }
 
 
-
     interface OnItemClickListener {
-        fun onItemClicked(currencyInfo: CurrencyInfoEntity)
+        fun onItemClicked(currencyInfo: CurrencyInfo)
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<CurrencyInfoEntity>() {
-        override fun areItemsTheSame(oldItem: CurrencyInfoEntity, newItem: CurrencyInfoEntity) =
+    class DiffCallback : DiffUtil.ItemCallback<CurrencyInfo>() {
+        override fun areItemsTheSame(oldItem: CurrencyInfo, newItem: CurrencyInfo) =
             oldItem.id == newItem.id // id is unique
 
-        override fun areContentsTheSame(oldItem: CurrencyInfoEntity, newItem: CurrencyInfoEntity) =
+        override fun areContentsTheSame(oldItem: CurrencyInfo, newItem: CurrencyInfo) =
             oldItem == newItem
     }
 }

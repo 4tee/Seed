@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.demo.seed.data.CurrencyInfoEntity
 import com.demo.seed.databinding.FragmentCurrencyListBinding
 import com.demo.seed.ui.DemoActivityViewModel
+import com.demo.seed.ui.model.CurrencyInfo
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,7 +49,7 @@ class CurrencyListFragment : Fragment(), CurrencyListAdapter.OnItemClickListener
         }
     }
 
-    override fun onItemClicked(currencyInfo: CurrencyInfoEntity) {
+    override fun onItemClicked(currencyInfo: CurrencyInfo) {
         activityViewModel.updateSelectedCurrencyInfo(currencyInfo)
     }
 }
