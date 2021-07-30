@@ -5,10 +5,10 @@ import com.demo.seed.ui.model.CurrencyInfo
 
 class CacheDataSourceImpl(
     private val currencyListDaoService: CurrencyListDaoService,
-    private val currencyMapper: CurrencyMapper
+    private val currencyMapper: CurrencyMapper,
 ) : CacheDataSource {
 
     override suspend fun get(): List<CurrencyInfo> {
-        return currencyMapper.mapFromEntityList(currencyListDaoService.get())
+        return currencyListDaoService.get().map { currencyMapper.mapFromEntity(it) }
     }
 }

@@ -3,6 +3,7 @@ package com.demo.seed.di
 import android.app.Application
 import androidx.room.Room
 import com.demo.seed.data.CurrencyRepository
+import com.demo.seed.data.SortRepository
 import com.demo.seed.data.cache.CacheDataSource
 import com.demo.seed.data.cache.CacheDataSourceImpl
 import com.demo.seed.data.cache.CurrencyListDaoService
@@ -39,6 +40,12 @@ object AppModule {
         currencyMapper: CurrencyMapper
     ): CacheDataSource {
         return CacheDataSourceImpl(currencyListDaoService, currencyMapper)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSortRepository(): SortRepository {
+        return SortRepository()
     }
 
     @Singleton

@@ -12,7 +12,7 @@
         android:text="@string/load"
         android:layout_marginHorizontal="5dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/button_sort"
@@ -21,7 +21,7 @@
         android:text="@string/sort"
         android:layout_marginHorizontal="5dp"
         app:layout_constraintStart_toEndOf="@id/button_load"
-        app:layout_constraintTop_toTopOf="@id/button_load"/>
+        app:layout_constraintTop_toTopOf="@id/button_load" />
 
     <fragment
         android:id="@+id/nav_host_fragment_content_main"

@@ -1,7 +1,6 @@
 package com.demo.seed.ui
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -11,7 +10,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.demo.seed.R
 import com.demo.seed.databinding.ActivityDemoBinding
 import com.demo.seed.extension.setDebounceClickedListener
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_demo.*
 import kotlinx.android.synthetic.main.content_main.*
 
 @AndroidEntryPoint
@@ -45,7 +46,11 @@ class DemoActivity : AppCompatActivity() {
         }
 
         activityViewModel.currencyInfoSelected.observe(this) { currencyInfo ->
-            Toast.makeText(this, "$currencyInfo at DemoActivity", Toast.LENGTH_SHORT).show()
+            Snackbar.make(
+                layout_demo,
+                "$currencyInfo at DemoActivity",
+                Snackbar.LENGTH_SHORT
+            ).show()
         }
     }
 

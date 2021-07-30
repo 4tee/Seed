@@ -5,16 +5,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.demo.seed.data.CurrencyRepository
+import com.demo.seed.data.SortRepository
 import com.demo.seed.ui.model.CurrencyInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DemoActivityViewModel @Inject constructor(
-    private val currencyRepository: CurrencyRepository
+    private val currencyRepository: CurrencyRepository,
+    private val sortRepository: SortRepository
 ) :
     ViewModel() {
 
@@ -29,18 +29,17 @@ class DemoActivityViewModel @Inject constructor(
     }
 
     fun loadCurrencyList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            currencyRepository.execute().collect {
-                mutableCurrencyList.postValue(it)
-            }
+        viewModelScope.launch {
+            val result = currencyRepository.execute()
+            mutableCurrencyList.value = result
         }
     }
 
     fun sortCurrencyList() {
-        viewModelScope.launch(Dispatchers.Default) {
-            currencyList.value?.let { list ->
-                val sortedList = list.sortedBy { it.symbol }
-                mutableCurrencyList.postValue(sortedList)
+        viewModelScope.launch {
+            currencyList.value?.let { rawList ->
+                val sortedList = sortRepository.sortInMemory(rawList)
+                mutableCurrencyList.value = sortedList
             }
         }
     }

@@ -20,8 +20,4 @@ constructor() : EntityMapper<CurrencyInfoEntity, CurrencyInfo> {
             symbol = domainModel.symbol
         )
     }
-
-    fun mapFromEntityList(entities: List<CurrencyInfoEntity>): List<CurrencyInfo> {
-        return entities.map { mapFromEntity(it) }
-    }
 }
